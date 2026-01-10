@@ -1,22 +1,18 @@
 package com.poharkar.project.airBnbApp.dto;
 
-import com.poharkar.project.airBnbApp.entity.User;
 import com.poharkar.project.airBnbApp.entity.enums.Gender;
-import jakarta.persistence.*;
+import com.poharkar.project.airBnbApp.entity.enums.Role;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
-public class GuestDto {
+public class UserDto {
     private Long id;
-
-    private User user;
-
+    private String email;
     private String name;
-
+    private Set<Role> roles;
     private Gender gender;
-
-
     private LocalDate dateOfBirth;
 }
