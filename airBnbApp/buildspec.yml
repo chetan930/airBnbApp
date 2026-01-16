@@ -6,7 +6,7 @@ phases:
       java: corretto21
   build:
     commands:
-      - echo Build, Testing and packaging the application...
+      - echo Build, Started testing and packaging the application...
       - cd airBnbApp
       - mvn clean package -DskipTests
   post_build:
