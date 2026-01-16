@@ -7,13 +7,14 @@ phases:
   build:
     commands:
       - echo Build, Started testing and packaging the application...
-      - mvn package -DskipTests
+      - cd airBnbApp
+      - mvn clean package -DskipTests
   post_build:
     commands:
       - echo Build, Testing and packaging the completed
 artifacts:
   files:
-    - target/*.jar
+    - airBnbApp/target/*.jar
   discard-paths: yes
 cache:
   paths:
