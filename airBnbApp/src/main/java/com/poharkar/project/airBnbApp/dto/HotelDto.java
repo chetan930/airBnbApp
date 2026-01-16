@@ -24,4 +24,6 @@ public class HotelDto {
 
     private Boolean active;
 
+    private Double rating;
+
 }

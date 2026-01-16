@@ -21,7 +21,7 @@ public class HotelBrowseController {
     private final InventoryService inventoryService;
     private final HotelService hotelService;
 
-    @GetMapping("/search")
+    @PostMapping("/search")
     public ResponseEntity<Page<HotelPriceDto>> searchHotels(@RequestBody HotelSearchRequest hotelSearchRequest){
         log.info("Attempting to fetch a hotel with HotelSearchRequest {}", hotelSearchRequest.getCity());
         Page<HotelPriceDto> page=inventoryService.searchHotels(hotelSearchRequest);

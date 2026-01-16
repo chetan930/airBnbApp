@@ -37,6 +37,8 @@ public class AuthController {
 
         Cookie cookie=new Cookie("refreshToken",tokens[1]);
         cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setSecure(false);
         httpServletResponse.addCookie(cookie);
 
         return ResponseEntity.ok(new LoginResponseDto(tokens[0]));
@@ -44,7 +46,11 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<LoginResponseDto> signUp(HttpServletRequest httpServletRequest){
-        String refreshToken= Arrays.stream(httpServletRequest.getCookies())
+        Cookie[] cookies = httpServletRequest.getCookies();
+        if (cookies == null) {
+            throw new AuthenticationServiceException("No cookies found");
+        }
+        String refreshToken= Arrays.stream(cookies)
                 .filter(cookie -> "refreshToken".equals(cookie.getName()))
                 .findFirst()
                 .map(cookie -> cookie.getValue())

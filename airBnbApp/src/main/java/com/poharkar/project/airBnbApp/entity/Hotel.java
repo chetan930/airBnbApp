@@ -49,4 +49,20 @@ public class Hotel {
     @JsonIgnore
     private List<Room> rooms;
 
+    private Double rating;
+
+
+
+
+    // Ratings & Popularity
+//    private Double rating;
+//    private int reviewsCount;
+//    private int bookingCount;
+
+    // Discovery Flags (VERY IMPORTANT)
+//    private boolean featured;
+//    private boolean guestFavorite;
+//    private boolean trending;
+//    private boolean newListing;
+
 }

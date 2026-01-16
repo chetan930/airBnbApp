@@ -28,6 +28,11 @@ public class HotelController {
         return new ResponseEntity<>(hotelService.createNewHotel(hotelDto), HttpStatus.CREATED);
     }
 
+    @PostMapping("/bulk")
+    public ResponseEntity<List<HotelDto>> createBulkHotels(@RequestBody List<HotelDto> hotelDtoList){
+        return new ResponseEntity<>(hotelService.createBulkHotels(hotelDtoList), HttpStatus.CREATED);
+    }
+
     @GetMapping("/{hotelId}")
     public ResponseEntity<HotelDto> getHotelById(@PathVariable Long hotelId){
         log.info("Attempting to fetch a hotel with ID {}", hotelId);

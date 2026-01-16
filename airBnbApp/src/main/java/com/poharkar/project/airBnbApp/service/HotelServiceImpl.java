@@ -18,6 +18,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,33 @@ public class HotelServiceImpl implements HotelService{
         log.info("Created a new hotel with ID {}", savedHotel.getId());
 
         return modelMapper.map(savedHotel,HotelDto.class);
+    }
+
+//    just for dumping bulk data
+    @Override
+    public List<HotelDto> createBulkHotels(List<HotelDto> hotelDtoList) {
+
+        List<Hotel> hotelList= hotelDtoList.stream()
+                .map((element) -> modelMapper.map(element, Hotel.class))
+                .toList();
+
+        User user=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<Hotel> savedHotelList=new ArrayList<>();
+
+        for(Hotel hotel : hotelList){
+            log.info("Creating a new hotel with name {}", hotel.getName());
+            hotel.setActive(true);
+            hotel.setOwner(user);
+            Hotel savedHotel=hotelRepository.save(hotel);
+            savedHotelList.add(savedHotel);
+            log.info("Created a new hotel with ID {}", savedHotel.getId());
+        }
+
+
+        return savedHotelList.stream()
+                .map((element) -> modelMapper.map(element, HotelDto.class))
+                .toList();
     }
 
     @Override
